@@ -14,26 +14,23 @@ logger = logging.getLogger()
 
 
 def go(args):
-
+    """
+    The basic cleaning function 
+    """
     run = wandb.init(job_type="basic_cleaning")
     run.config.update(args)
 
-    # Download input artifact. This will also log that this script is using this
     logger.info("Dowload input artifact")
     path = run.use_artifact(args.input_artifact).file()
     df = pd.read_csv(path)
 
-    # Drop outliers
     logger.info("Drop outliers")
     min_price = args.min_price
     max_price = args.max_price
     idx = df['price'].between(min_price, max_price)
     df = df[idx].copy()
 
-    # Convert last_review to datetime
     df['last_review'] = pd.to_datetime(df['last_review'])
-    # particular version of the artifact
-    # artifact_local_path = run.use_artifact(args.input_artifact).file()
 
     filename = args.output_artifact
 

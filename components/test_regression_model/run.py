@@ -17,19 +17,17 @@ logger = logging.getLogger()
 
 
 def go(args):
-
+    """
+    The test regression model function
+    """
     run = wandb.init(job_type="test_model")
     run.config.update(args)
 
     logger.info("Downloading artifacts")
-    # Download input artifact. This will also log that this script is using this
-    # particular version of the artifact
     model_local_path = run.use_artifact(args.mlflow_model).download()
 
-    # Download test dataset
     test_dataset_path = run.use_artifact(args.test_dataset).file()
 
-    # Read test dataset
     X_test = pd.read_csv(test_dataset_path)
     y_test = X_test.pop("price")
 
@@ -45,7 +43,6 @@ def go(args):
     logger.info(f"Score: {r_squared}")
     logger.info(f"MAE: {mae}")
 
-    # Log MAE and r2
     run.summary['r2'] = r_squared
     run.summary['mae'] = mae
 

@@ -15,7 +15,10 @@ logger = logging.getLogger()
 
 
 def go(args):
-
+    """
+    Download data from the repository
+    Upload data into the W&B artifact
+    """
     run = wandb.init(job_type="download_file")
     run.config.update(args)
 

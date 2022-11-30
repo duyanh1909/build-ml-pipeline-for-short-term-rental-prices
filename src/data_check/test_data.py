@@ -1,3 +1,6 @@
+"""
+Data check file
+"""
 import pandas as pd
 import numpy as np
 import scipy.stats
@@ -26,17 +29,17 @@ def test_column_names(data):
 
     these_columns = data.columns.values
 
-    # This also enforces the same order
     assert list(expected_colums) == list(these_columns)
 
 
 def test_neighborhood_names(data):
-
+    """
+    Check neighborhood_names into the list
+    """
     known_names = ["Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"]
 
     neigh = set(data['neighbourhood_group'].unique())
 
-    # Unordered check
     assert set(known_names) == set(neigh)
 
 

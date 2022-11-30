@@ -1,3 +1,6 @@
+"""
+The fixtures of Pytest for data check steps
+"""
 import pytest
 import pandas as pd
 import wandb
@@ -13,10 +16,11 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope='session')
 def data(request):
+    """
+    Read data csv file from W&B artifact
+    """
     run = wandb.init(job_type="data_tests", resume=True)
 
-    # Download input artifact. This will also note that this script is using this
-    # particular version of the artifact
     data_path = run.use_artifact(request.config.option.csv).file()
 
     if data_path is None:
@@ -29,10 +33,11 @@ def data(request):
 
 @pytest.fixture(scope='session')
 def ref_data(request):
+    """
+    Read reference data csv file from W&B artifact
+    """
     run = wandb.init(job_type="data_tests", resume=True)
 
-    # Download input artifact. This will also note that this script is using this
-    # particular version of the artifact
     data_path = run.use_artifact(request.config.option.ref).file()
 
     if data_path is None:
@@ -45,6 +50,9 @@ def ref_data(request):
 
 @pytest.fixture(scope='session')
 def kl_threshold(request):
+    """
+    Get and check KL threshold parameter
+    """
     kl_threshold = request.config.option.kl_threshold
 
     if kl_threshold is None:
@@ -55,6 +63,9 @@ def kl_threshold(request):
 
 @pytest.fixture(scope='session')
 def min_price(request):
+    """
+    Get and check min_price parameter
+    """
     min_price = request.config.option.min_price
 
     if min_price is None:
@@ -65,6 +76,9 @@ def min_price(request):
 
 @pytest.fixture(scope='session')
 def max_price(request):
+    """
+    Get and check max_price parameter
+    """
     max_price = request.config.option.max_price
 
     if max_price is None:
