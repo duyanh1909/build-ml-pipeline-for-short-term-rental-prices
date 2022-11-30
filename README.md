@@ -1,4 +1,6 @@
 # Build an ML Pipeline for Short-Term Rental Prices in NYC
+- W&B Project : https://wandb.ai/anhndd3/nyc_airbnb/overview?workspace=user-uit
+
 You are working for a property management company renting rooms and properties for short periods of 
 time on various rental platforms. You need to estimate the typical price for a given property based 
 on the price of similar properties. Your company receives new data in bulk every week. The model needs 
@@ -38,7 +40,7 @@ and click on `Fork` in the upper right corner. This will create a fork in your G
 repository that is under your control. Now clone the repository locally so you can start working on it:
 
 ```
-git clone https://github.com/[your github username]/build-ml-pipeline-for-short-term-rental-prices.git
+git clone https://github.com/duyanh1909/build-ml-pipeline-for-short-term-rental-prices.git
 ```
 
 and go into the repository:
@@ -169,7 +171,7 @@ _ = mlflow.run(
             )
 ```
 where `config['main']['components_repository']` is set to 
-[https://github.com/udacity/build-ml-pipeline-for-short-term-rental-prices#components](https://github.com/udacity/build-ml-pipeline-for-short-term-rental-prices/tree/main/components).
+[https://github.com/udacity/build-ml-pipeline-for-short-term-rental-prices#components](https://github.com/udacity/build-ml-pipeline-for-short-term-rental-prices#components).
 You can see the parameters that they require by looking into their `MLproject` file:
 
 - `get_data`: downloads the data. [MLproject](https://github.com/udacity/build-ml-pipeline-for-short-term-rental-prices/blob/main/components/get_data/MLproject)
@@ -340,10 +342,11 @@ with the cleaned data:
                     so we must add it to ``conda.yml`` file, including a version:
    ```yaml
    dependencies:
-     - pip=20.3.3
+     - pip=22.2.2
      - pandas=1.2.3
      - pip:
-         - wandb==0.10.31
+         - wandb == 0.13.2
+
    ```
    
 4. Add the ``basic_cleaning`` step to the pipeline (the ``main.py`` file):
@@ -539,7 +542,7 @@ train the model on a new sample of data that our company received (``sample2.csv
 
 (be ready for a surprise, keep reading even if the command fails)
 ```bash
-> mlflow run https://github.com/[your github username]/build-ml-pipeline-for-short-term-rental-prices.git \
+> mlflow run https://github.com/duyanh1909/build-ml-pipeline-for-short-term-rental-prices.git \
              -v [the version you want to use, like 1.0.0] \
              -P hydra_options="etl.sample='sample2.csv'"
 ```
