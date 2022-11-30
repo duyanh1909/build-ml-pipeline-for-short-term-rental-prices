@@ -15,7 +15,9 @@ logger = logging.getLogger()
 
 
 def go(args):
-
+    """
+    Split data into train, validation, and test datasets.
+    """
     run = wandb.init(job_type="train_val_test_split")
     run.config.update(args)
 
