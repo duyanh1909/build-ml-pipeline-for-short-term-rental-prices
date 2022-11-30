@@ -543,7 +543,7 @@ train the model on a new sample of data that our company received (``sample2.csv
 (be ready for a surprise, keep reading even if the command fails)
 ```bash
 > mlflow run https://github.com/duyanh1909/build-ml-pipeline-for-short-term-rental-prices.git \
-             -v [the version you want to use, like 1.0.0] \
+             -v 1.0.1 \
              -P hydra_options="etl.sample='sample2.csv'"
 ```
 
